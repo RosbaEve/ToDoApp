@@ -3,10 +3,26 @@ const input = document.getElementById("input");
 let todoList = [];                                  // Creating empty array for todolistobjects
 let id = 0;                                         // setting id to zero by default
 
-
 const complete = "fa-check-circle-o";
 const uncomplete = "fa-circle-thin";
 let taskDone = document.getElementsByClassName("fa-cicrle-thin") //element and classes for checking if the task is complete
+
+let todoData = localStorage.getItem("task")         //Getting data from localstorage
+
+if (todoData !== ''){                              //If there is data, perform loadlist function and set id for new task based on the lenghth of the list
+    todoList = JSON.parse(todoData)
+    id = todoList.length;
+    loadlist(todoList);
+} else {
+    todoList = [];
+    id = 0;
+}
+
+function loadlist(array){                          //Function for loading the list and displaying it
+    array.forEach(function(todoTask){              //Display all the todoTasks within the array with all the properties they have
+        addToDo(todoTask.name, todoTask.id, todoTask.done, todoTask.trash);
+    });
+}
 
 function addToDo(toDo, id, done, trash){            //function for adding todo item to list withid & cirlce icon for complete and trash for deleting                    
     
