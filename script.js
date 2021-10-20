@@ -36,7 +36,7 @@ function addToDo(toDo, id, done, trash){            //function for adding todo i
         taskDone = uncomplete;
     }
 
-    const text = `<li class = "item">
+    const text = `<li class = "todoTask">
                     <i class = "fa ${taskDone} co" job= "complete" id = ${id}></i>
                     <p class = "text">${toDo}</p> 
                     <i class=" fa fa-trash de" job = "delete" id = ${id}></i>
@@ -62,15 +62,21 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
 
         localStorage.setItem("task",JSON.stringify(todoList));
 
+        document.getElementById('feedback').innerHTML= "";  //If the input field is not empty, clear add task text and change border color to white
+        let inputField = document.getElementById('input')
+        inputField.style.borderColor = "white";
+
         id++;                                       //Id number increases so that every list object have unique id assigned 
     }
     if (toDo == '') {                               //If input field is empty, the page will give alert to add a task to the field
-        alert("Please add task");
+        document.getElementById('feedback').innerHTML= "<br>Please add task";
+        //alert("Please add task");
+        let inputField = document.getElementById('input')
+        inputField.style.borderColor = "red";       //Change inputfiel bordercolor to read if there is no input when submitting
     }
     input.value = '';                               //Clearing the input field
 });
 
-addToDo("coffee", 1, true, false)
 
 list.addEventListener('click', function(event){     //Event listener for the list so that we can perform different functions based on what element inside of the list is clicked
     const element = event.target;
@@ -91,6 +97,12 @@ function deleteToDo(element){                       //Deleting the element from 
 }
 
 function completeToDo(element){
-    element.classList.toggle(complete);
-    element.classList.toggle(uncomplete);
+
+    element.classList.toggle(uncomplete); 
+
+    if (todoList[element.id].done = true){
+      element.classList.toggle(complete);  
+    }
+   
+
 }
