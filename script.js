@@ -59,9 +59,17 @@ list.addEventListener('click', function(event){     //Event listener for the lis
     if(elementJob == "delete") {                    //If the job attribute is delete, perform delete funtion
         deleteToDo(element);
     }
+    if (elementJob == "complete") {                 //If the job attribute is complete, perform complete function
+        completeToDo(element);
+    }
 })
 
 function deleteToDo(element){                       //Deleting the element from page and assigning trash value for true
     element.parentNode.parentNode.removeChild(element.parentNode);
     todoList[element.id].trash = true;
+}
+
+function completeToDo(element){
+    element.classList.toggle(complete);
+    element.classList.toggle(uncomplete);
 }
