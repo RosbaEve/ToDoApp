@@ -8,8 +8,9 @@ const uncomplete = "fa-circle-thin";
 let taskDone = document.getElementsByClassName("fa-cicrle-thin") //element and classes for checking if the task is complete
 
 let todoData = localStorage.getItem("task")         //Getting data from localstorage
+let clearButton = document.getElementById("clear")
 
-if (todoData !== ''){                              //If there is data, perform loadlist function and set id for new task based on the lenghth of the list
+if (todoData){                              //If there is data, perform loadlist function and set id for new task based on the lenghth of the list
     todoList = JSON.parse(todoData)
     id = todoList.length;
     loadlist(todoList);
@@ -46,6 +47,13 @@ function addToDo(toDo, id, done, trash){            //function for adding todo i
 
     list.insertAdjacentHTML(position, text);       
 }
+document.addEventListener("keyup",function(event) { //Possibility to add task by pressing enter
+    if (event.keyCode === 13){                      //Enter button keycode is 13 
+        event.preventDefault();
+
+        document.getElementById("submit-button").click();   //Trigger submitkeys click with enter
+    }
+});
 
 document.getElementById("submit-button").addEventListener("click", function(){ //When submit-button is clicked, function is performed
     const toDo = input.value;                       //Assigning value for the toDo to be the text from input field
@@ -64,19 +72,18 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
 
         document.getElementById('feedback').innerHTML= "";  //If the input field is not empty, clear add task text and change border color to white
         let inputField = document.getElementById('input')
-        inputField.style.borderColor = "white";
+        inputField.style.borderColor = "grey";
 
         id++;                                       //Id number increases so that every list object have unique id assigned 
     }
     if (toDo == '') {                               //If input field is empty, the page will give alert to add a task to the field
-        document.getElementById('feedback').innerHTML= "<br>Please add task";
+        document.getElementById('feedback').innerHTML= "<br><b>Please add task<b>";
         //alert("Please add task");
         let inputField = document.getElementById('input')
         inputField.style.borderColor = "red";       //Change inputfiel bordercolor to read if there is no input when submitting
     }
     input.value = '';                               //Clearing the input field
 });
-
 
 list.addEventListener('click', function(event){     //Event listener for the list so that we can perform different functions based on what element inside of the list is clicked
     const element = event.target;
@@ -89,7 +96,7 @@ list.addEventListener('click', function(event){     //Event listener for the lis
         completeToDo(element);
     }
     localStorage.setItem("task",JSON.stringify(todoList));
-})
+});
 
 function deleteToDo(element){                       //Deleting the element from page and assigning trash value for true
     element.parentNode.parentNode.removeChild(element.parentNode);
@@ -101,8 +108,13 @@ function completeToDo(element){
     element.classList.toggle(uncomplete); 
 
     if (todoList[element.id].done = true){
-      element.classList.toggle(complete);  
+      element.classList.toggle(complete);
+      element.parentNode.style.opacity = "0.5";  
     }
-   
 
 }
+
+clearButton.addEventListener('click', function(){
+    localStorage.clear();
+    location.reload();
+})
