@@ -3,6 +3,7 @@ const input = document.getElementById("input");
 let todoList = [];                                  // Creating empty array for todolistobjects
 let id = 0;                                         // setting id to zero by default
 
+
 const complete = "fa-check-circle-o";
 const uncomplete = "fa-circle-thin";
 let taskDone = document.getElementsByClassName("fa-cicrle-thin") //element and classes for checking if the task is complete
@@ -42,6 +43,9 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
             done: false,
             trash : false,
         });
+
+        localStorage.setItem("task",JSON.stringify(todoList));
+
         id++;                                       //Id number increases so that every list object have unique id assigned 
     }
     if (toDo == '') {                               //If input field is empty, the page will give alert to add a task to the field
@@ -62,6 +66,7 @@ list.addEventListener('click', function(event){     //Event listener for the lis
     if (elementJob == "complete") {                 //If the job attribute is complete, perform complete function
         completeToDo(element);
     }
+    localStorage.setItem("task",JSON.stringify(todoList));
 })
 
 function deleteToDo(element){                       //Deleting the element from page and assigning trash value for true
