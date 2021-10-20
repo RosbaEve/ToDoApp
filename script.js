@@ -1,6 +1,7 @@
 const list = document.getElementById("list");       //getting elements
 const input = document.getElementById("input");
 let todoList = [];                                  // Creating empty array for todolistobjects
+let id = 0;
 
 function addToDo(toDo, id, done, trash){            //function for adding todo item to list withid & cirlce icon for complete and trash for deleting                    
     
@@ -9,7 +10,7 @@ function addToDo(toDo, id, done, trash){            //function for adding todo i
     }
 
     const text = `<li class = "item">
-                    <i class = "fa fa-circle-thin co" job="complete" id = ${id}></i>
+                    <i class = "fa fa-circle-thin co" job= "complete" id = ${id}></i>
                     <p class = "text">${toDo}</p> 
                     <i class=" fa fa-trash de" job = "delete" id = ${id}></i>
                  </li>`;
@@ -23,7 +24,7 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
     const toDo = input.value;                       //Assigning value for the toDo to be the text from input field
 
     if (toDo !== '') {                              //Checking that the input is not empty
-        addToDo(toDo);
+        addToDo(toDo, id, false, false);
 
         todoList.push({                             //Adding properties for the list object
             name: toDo,
@@ -31,6 +32,7 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
             done: false,
             trash : false,
         });
+        id++;                                       //Id number increases so that every list object have unique id assigned 
     }
     if (toDo == '') {                               //If input field is empty, the page will give alert to add a task to the field
         alert("Please add task");
@@ -38,3 +40,16 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
     input.value = '';                               //Clearing the input field
 });
 
+list.addEventListener('click', function(event){     //Event listener for the list so that we can perform different functions based on what element inside of the list is clicked
+    const element = event.target;
+    const elementJob = element.attributes.job.value;
+
+    if(elementJob == "delete") {                    //If the job attribute is delete, perform delete funtion
+        deleteToDo(element);
+    }
+})
+
+function deleteToDo(element){                       //Deleting the element from page and assigning trash value for true
+    element.parentNode.parentNode.removeChild(element.parentNode);
+    todoList[element.id].trash = true;
+}
