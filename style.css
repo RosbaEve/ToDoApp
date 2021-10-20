@@ -1,0 +1,25 @@
+.todoTask{
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.todoTask i.co{
+    position: absolute;
+    top:10px;
+}
+
+.todoTask p.text{
+    position: absolute;
+    margin:0;
+    left:50px;
+    top:5px;
+
+}
+
+.todoTask i.de{
+    position: absolute;
+    left:300px;
+    top:10px;
+}
+
