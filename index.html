@@ -9,23 +9,27 @@
     <body>
 
         <div class = "container"> <!--Container for the whole content-->
-        
+        <button class="clearButton" id = "clear">Clear<br><i class="fa fa-calendar"></i></button>
         <div class = "header"> 
-            <h1>To do</h1>
-        </div>
-
+            <h1>Day Planner</h1>
         <div class = "item">
-            <input type ="text" id = "input"> <!--Input field for todos-->
+            <input type ="text" id = "input" placeholder="add task for today..."> <!--Input field for todos-->
             <button class = "submit-button" id = "submit-button"><i class="fa fa-send-o"></i></button>
 
             <span id = "feedback"></span>
         </div>
+            
+        </div>
+
+       
         
         <div class ="content"> <!--Container for the list/todo items-->
             <ul id = list>
 
             </ul>
         </div> 
+
+        
         </div>
 
         <script src = "script.js"></script>
