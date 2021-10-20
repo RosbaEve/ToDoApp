@@ -2,12 +2,16 @@ const list = document.getElementById("list");       //getting elements
 const input = document.getElementById("input");
 let todoList = [];                                  // Creating empty array for todolistobjects
 
-function addToDo(toDo){                             //function for adding todo item to list with cirlce icon for complete and trash for deleting                    
+function addToDo(toDo, id, done, trash){            //function for adding todo item to list withid & cirlce icon for complete and trash for deleting                    
+    
+    if (trash == true) {                            //If the element of trash is true, rest of the code will not be executed
+        return;
+    }
 
     const text = `<li class = "item">
-                    <i class = "fa fa-circle-thin co" job="complete"></i>
+                    <i class = "fa fa-circle-thin co" job="complete" id = ${id}></i>
                     <p class = "text">${toDo}</p> 
-                    <i class=" fa fa-trash de" job = "delete"></i>
+                    <i class=" fa fa-trash de" job = "delete" id = ${id}></i>
                  </li>`;
 
     const position = "afterbegin";                  //Adding the new todo item to the top of the list
@@ -19,10 +23,18 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
     const toDo = input.value;                       //Assigning value for the toDo to be the text from input field
 
     if (toDo !== '') {                              //Checking that the input is not empty
-        addToDo(toDo)
+        addToDo(toDo);
+
+        todoList.push({                             //Adding properties for the list object
+            name: toDo,
+            id: id,
+            done: false,
+            trash : false,
+        });
     }
     if (toDo == '') {                               //If input field is empty, the page will give alert to add a task to the field
         alert("Please add task");
     }
     input.value = '';                               //Clearing the input field
 });
+
