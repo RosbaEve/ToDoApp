@@ -1,25 +1,30 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .todoTask{
-    position: relative;
+    display: flex;
     list-style: none;
-    padding: 0;
-    margin: 0;
+    justify-content: center;
+    margin-left: -50px;
 }
 .todoTask i.co{
-    position: absolute;
-    top:10px;
+    margin-top: 20px;
 }
 
 .todoTask p.text{
-    position: absolute;
-    margin:0;
-    left:50px;
-    top:5px;
+    margin-left: 10px;
+    margin-right: auto;
 
 }
 
 .todoTask i.de{
-    position: absolute;
-    left:300px;
-    top:10px;
+    margin-top: 20px;
+    margin-left: 80px;
 }
 
