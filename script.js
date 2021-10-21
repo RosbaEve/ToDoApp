@@ -32,9 +32,12 @@ function loadlist(array){                          //Function for loading the li
     });
 }
 
+//Getting the amount of uncompleted tasks from localstorage
+
 function loadCount() {
     document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
 }
+
 
 //Function addTodo
 
@@ -48,10 +51,11 @@ function addToDo(toDo, id, done, trash){            //function for adding todo i
     }
     if (done == false){                             //If done property is false, display empty circle
         taskDone = uncomplete;
-        count++;
+        count++;                                    // If the task is uncompleted, add count by one
         localStorage.setItem('taskCount', count);
         document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
     }
+
 
     const text = `<li class = "todoTask">
                     <i class = "fa ${taskDone} co" job= "complete" id = ${id}></i>
