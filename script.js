@@ -87,7 +87,7 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
         let inputField = document.getElementById('input')
         inputField.style.borderColor = "grey";
 
-        id++;                                       //Id number increases so that every list object have unique id assigned 
+        id++;                                       //Id number increases so that every list object have unique id assigned       
         count++;
         document.getElementById('counter').innerHTML = count;
     }
@@ -132,8 +132,6 @@ function completeToDo(element){
     if (todoList[element.id].done = true){
       element.classList.toggle(complete);
       element.parentNode.style.opacity = "0.5";                //Change element opacity when it is marked done
-      count = count -1;                                        //Reduce the amount of tasks left by one
-      document.getElementById('counter').innerHTML = count;    //Display the new amount in counter
     } 
 }
 
@@ -143,3 +141,19 @@ clearButton.addEventListener('click', function(){
     localStorage.clear();
     location.reload();
 })
+
+//Counting the tasks that are left to do
+
+list.addEventListener('click', function(event){     //Event listener for the list so that we can perform different functions based on what element inside of the list is clicked
+    const element = event.target;
+    const elementJob = element.attributes.job.value;
+
+    if(elementJob == "delete" && todoList[element.id].done == true) {    //If the todo task is already marked as done, deleting the task will not reduce the count of tasks that are left         
+        count = count;  
+        document.getElementById('counter').innerHTML = count;
+    } else {                                                             //In other cases(marking the task as done or deleting it) the amount of tasks to be done are reduced by one
+        count = count-1;
+        document.getElementById('counter').innerHTML = count;
+    }
+
+});
