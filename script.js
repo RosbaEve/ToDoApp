@@ -4,6 +4,7 @@ const list = document.getElementById("list");       //getting elements
 const input = document.getElementById("input");
 let todoList = [];                                  // Creating empty array for todolistobjects
 let id = 0;                                         // setting id to zero by default
+let doneList = document.getElementById('doneList')
 
 const complete = "fa-check-circle-o";
 const uncomplete = "fa-circle-thin";
@@ -19,6 +20,7 @@ if (todoData){                              //If there is data, perform loadlist
     todoList = JSON.parse(todoData)
     id = todoList.length;
     loadlist(todoList);
+    loadCount();
 } else {
     todoList = [];
     id = 0;
@@ -30,6 +32,10 @@ function loadlist(array){                          //Function for loading the li
     });
 }
 
+function loadCount() {
+    document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
+}
+
 //Function addTodo
 
 function addToDo(toDo, id, done, trash){            //function for adding todo item to list withid & cirlce icon for complete and trash for deleting                    
@@ -39,10 +45,12 @@ function addToDo(toDo, id, done, trash){            //function for adding todo i
     }
     if (done == true) {                             //If done property is true, display check circle
         taskDone = complete;
-
     }
     if (done == false){                             //If done property is false, display empty circle
         taskDone = uncomplete;
+        count++;
+        localStorage.setItem('taskCount', count);
+        document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
     }
 
     const text = `<li class = "todoTask">
@@ -60,7 +68,7 @@ function addToDo(toDo, id, done, trash){            //function for adding todo i
 
 document.addEventListener("keyup",function(event) { //Possibility to add task by pressing enter
     if (event.keyCode === 13){                      //Enter button keycode is 13 
-        event.preventDefault();
+        //event.preventDefault();
 
         document.getElementById("submit-button").click();   //Trigger submitkeys click with enter
     }
@@ -88,9 +96,8 @@ document.getElementById("submit-button").addEventListener("click", function(){ /
         inputField.style.borderColor = "grey";
 
         id++;                                       //Id number increases so that every list object have unique id assigned       
-        count++;
-        document.getElementById('counter').innerHTML = count;
     }
+
     if (toDo == '') {                               //If input field is empty, the page will give alert to add a task to the field
         document.getElementById('feedback').innerHTML= "<br><b>Please add task<b>";
         //alert("Please add task");
@@ -111,7 +118,6 @@ list.addEventListener('click', function(event){     //Event listener for the lis
     }
     if (elementJob == "complete") {                 //If the job attribute is complete, perform complete function
         completeToDo(element);
-        moveElement(element)
     }
     localStorage.setItem("task",JSON.stringify(todoList));
 });
@@ -127,12 +133,17 @@ function deleteToDo(element){                       //Deleting the element from 
 
 function completeToDo(element){
 
-    element.classList.toggle(uncomplete); 
-    
-    if (todoList[element.id].done = true){
-      element.classList.toggle(complete);
-      element.parentNode.style.opacity = "0.5";                //Change element opacity when it is marked done
-    } 
+    element.classList.toggle(uncomplete);
+    element.classList.toggle(complete);
+
+    todoList[element.id].done = todoList[element.id].done ? false : true;
+
+    if(todoList[element.id].done == true) {
+        element.parentNode.style.opacity = "0.5";
+    }
+    /*if (todoList[element.id].done = true){
+      
+    }*/
 }
 
 //Clear local storage
@@ -150,10 +161,20 @@ list.addEventListener('click', function(event){     //Event listener for the lis
 
     if(elementJob == "delete" && todoList[element.id].done == true) {    //If the todo task is already marked as done, deleting the task will not reduce the count of tasks that are left         
         count = count;  
-        document.getElementById('counter').innerHTML = count;
-    } else {                                                             //In other cases(marking the task as done or deleting it) the amount of tasks to be done are reduced by one
-        count = count-1;
-        document.getElementById('counter').innerHTML = count;
+        localStorage.setItem('taskCount', count);
+        document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
+    }
+
+    if(elementJob == "complete" && todoList[element.id].done == false) {    //If the todo task is marked as done again, the counter will add one        
+        count++;  
+        localStorage.setItem('taskCount', count);
+        document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
+    }
+    
+    else {                                                             //In other cases(marking the task as done or deleting it) the amount of tasks to be done are reduced by one
+        count = count - 1;
+        localStorage.setItem('taskCount', count);
+        document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
     }
 
 });
