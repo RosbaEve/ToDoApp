@@ -171,8 +171,14 @@ list.addEventListener('click', function(event){     //Event listener for the lis
         document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
     }
     
-    else {                                                             //In other cases(marking the task as done or deleting it) the amount of tasks to be done are reduced by one
+    if(elementJob == "delete" && todoList[element.id].done == false) {       //if the task is not marked done, but is removed anyway, the count will reduce one
         count = count - 1;
+        localStorage.setItem('taskCount', count);
+        document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
+    }
+
+    if(elementJob == "complete" && todoList[element.id].done == true) {    //If the todo task is marked as done  the counter will reduce one        
+        count--;  
         localStorage.setItem('taskCount', count);
         document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
     }
