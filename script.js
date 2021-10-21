@@ -137,13 +137,6 @@ function completeToDo(element){
     element.classList.toggle(complete);
 
     todoList[element.id].done = todoList[element.id].done ? false : true;
-
-    if(todoList[element.id].done == true) {
-        element.parentNode.style.opacity = "0.5";
-    }
-    /*if (todoList[element.id].done = true){
-      
-    }*/
 }
 
 //Clear local storage
