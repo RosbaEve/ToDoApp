@@ -14,3 +14,5 @@ The page is not responsive, so it will not work on mobile or tablet.
 I am not fully satisfied but the functionalities work as they are supposed to. 
 If I were to do this again I might have different way to approach this task. 
 I might do that actually just to learn to do this better and be able to add all the functionalities I would like this to have.
+
+Deployed with Netlify https://rosbaevetodo.netlify.app/
