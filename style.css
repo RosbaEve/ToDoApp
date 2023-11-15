@@ -16,7 +16,7 @@ body {
     background: linear-gradient(#73b1bc,#a3d4df);  
     background-repeat: no-repeat;
     box-shadow: 5px 5px 5px rgb(192,192,192);
-    background-image: url(img/wood.jpg);
+    background-image: url("img/wood.jpg");
     background-repeat: repeat-y;
 }
 
