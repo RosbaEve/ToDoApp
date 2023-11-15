@@ -1,4 +1,3 @@
-Roosa Turunen
 
 Todo application with Javascript, html and css.
 User can add tasks by writing them in input field. The task can by submitted with submit button or pressing enter key. 
@@ -15,8 +14,3 @@ The page is not responsive, so it will not work on mobile or tablet.
 I am not fully satisfied but the functionalities work as they are supposed to. 
 If I were to do this again I might have different way to approach this task. 
 I might do that actually just to learn to do this better and be able to add all the functionalities I would like this to have.
-
-Here is link to Netlify and Github
-
-https://roosastodoapp.netlify.app/
-https://github.com/RoosaEveliina/TodoApp

@@ -8,9 +8,13 @@
     </head>
     <body>
 
+
         <div class = "container"> <!--Container for the whole content-->
             <button class="clearButton" id = "clear">Clear<br><i class="fa fa-calendar"></i></button>
-            
+         <div class = "tasksLeft">   <!--Counter for the tasks left to do-->
+            <h4>Tasks left</h4>     
+            <div id = "counter">0</div>        
+        </div>    
         <div class = "header"> 
             <h1>Day Planner</h1>
         <div class = "item">
@@ -18,20 +22,16 @@
             <button class = "submit-button" id = "submit-button"><i class="fa fa-send-o"></i></button>
 
             <span id = "feedback"></span>
-        </div>            
-        </div>      
-        
+        </div> 
+             
+       
+
         <div class ="content"> <!--Container for the list/todo items-->
             <ul id = list>
 
             </ul>
         </div> 
-
-        <div class = "tasksLeft">
-            <h4>Tasks left</h4>
-            <div id = "counter">0</div>        
         </div>
-
         <script src = "script.js"></script>
     </body>
 </html>

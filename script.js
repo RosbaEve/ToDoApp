@@ -56,7 +56,6 @@ function addToDo(toDo, id, done, trash){            //function for adding todo i
         document.getElementById('counter').innerHTML = localStorage.getItem('taskCount');
     }
 
-
     const text = `<li class = "todoTask">
                     <i class = "fa ${taskDone} co" job= "complete" id = ${id}></i>
                     <p class = "text">${toDo}</p> 
@@ -72,7 +71,7 @@ function addToDo(toDo, id, done, trash){            //function for adding todo i
 
 document.addEventListener("keyup",function(event) { //Possibility to add task by pressing enter
     if (event.keyCode === 13){                      //Enter button keycode is 13 
-        //event.preventDefault();
+        event.preventDefault();
 
         document.getElementById("submit-button").click();   //Trigger submitkeys click with enter
     }
